@@ -54,13 +54,9 @@ L<KiokuDB::Role::ID> integration, and L<KiokuX::User::Password> which provides
 an L<Authen::Passphrase> based C<password> attribute and a C<check_password>
 method.
 
-=cut
-
 =head1 VERSION CONTROL
 
-This module is maintained using Darcs. You can get the latest version from
-L<http://nothingmuch.woobling.org/code>, and use C<darcs send> to commit
-changes.
+L<http://github.com/nothingmuch/kiokux-user/>
 
 =head1 AUTHOR
 
