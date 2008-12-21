@@ -32,7 +32,7 @@ KiokuX::User - A generic role for user objects stored in L<KiokuDB>
 	with qw(KiokuX::User);
 
 	my $user = MyFoo::User->new(
-		id		 => $user_id,
+		id       => $user_id,
 		password => crypt_password($password),
 	);
 
