@@ -28,7 +28,7 @@ __END__
 
 =head1 NAME
 
-KiokuX::User::Password - A role for users 
+KiokuX::User::Password - A role for users with a password attribute
 
 =head1 SYNOPSIS
 
