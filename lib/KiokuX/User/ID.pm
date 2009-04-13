@@ -7,7 +7,15 @@ use namespace::clean -except => 'meta';
 
 with qw(KiokuDB::Role::ID);
 
-sub kiokudb_object_id { "user:" . shift->id }
+sub id_for_user {
+	my ( $self, $id ) = @_;
+	return "user:$id"
+}
+
+sub kiokudb_object_id {
+	my $self = shift;
+	$self->id_for_user($self->id);
+}
 
 has id => (
     isa => "Str",
