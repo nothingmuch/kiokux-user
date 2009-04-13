@@ -39,7 +39,7 @@ ok !$o->check_password("fooo"), "bad password";
 
 is eval { $o->id("lala") }, undef, "can't change ID";
 
-$o->password( crypt_password( passphrase => "bar" ) );
+$o->set_password("bar");
 
 ok !$o->check_password("foo"), "password changed";
 

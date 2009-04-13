@@ -5,6 +5,8 @@ use Moose::Role;
 
 use MooseX::Types::Authen::Passphrase qw(Passphrase);
 
+use KiokuX::User::Util qw(crypt_password);
+
 use namespace::clean -except => 'meta';
 
 has password => (
@@ -18,6 +20,11 @@ has password => (
 sub check_password {
     my $self = shift;
     $self->password->match(@_);
+}
+
+sub set_password {
+	my ( $self, @args ) = @_;
+	$self->password( crypt_password(@args) );
 }
 
 __PACKAGE__
