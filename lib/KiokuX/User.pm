@@ -24,14 +24,14 @@ KiokuX::User - A generic role for user objects stored in L<KiokuDB>
 
 =head1 SYNOPSIS
 
-	package MyFoo::User;
+	package MyFoo::Schema::User;
 	use Moose;
 
 	use KiokuX::User::Util qw(crypt_password);
 
 	with qw(KiokuX::User);
 
-	my $user = MyFoo::User->new(
+	my $user = MyFoo::Schema::User->new(
 		id       => $user_id,
 		password => crypt_password($password),
 	);
@@ -53,6 +53,51 @@ It consumes L<KiokuX::User::ID> which provides the C<id> attribute and
 L<KiokuDB::Role::ID> integration, and L<KiokuX::User::Password> which provides
 an L<Authen::Passphrase> based C<password> attribute and a C<check_password>
 method.
+
+=head1 USE AS A DELEGATE
+
+This role strictly implements a notion of an authenticatable identity, not of a
+user.
+
+If you want to support renaming, multiple authentication methods (e.g. a
+password and/or an openid), it's best to create identity delegates that consume
+this role, and have them point at the actual user object:
+
+	package MyFoo::Schema::Identity;
+	use Moose::Role;
+
+	has user => (
+		isa => "MyFoo::Schema::User",
+		is  => "ro",
+		required => 1,
+	);
+
+And here's an example username identity:
+
+	package MyFoo::Schema::Identity::Username;
+	use Moose;
+
+	with qw(
+		MyFoo::Schema::Identity
+		KiokuX::User
+	);
+
+and then point back to these identities from the user:
+
+    has identities => (
+        isa      => "ArrayRef[MyFoo::Schema::Identity]",
+        is       => "rw",
+        required => 1,
+    );
+
+Since the identity is part of the objects' ID uniqueness is enforced in a
+portable way (you don't need to use the DBI backend and a custom unique
+constraint).
+
+This also allows you to easily add additional authentication schemes, change
+them, provide namespacing support and so on without affecting the high level
+user object, which represents the actual account holder regardless of the
+authentication scheme they used.
 
 =head1 VERSION CONTROL
 
