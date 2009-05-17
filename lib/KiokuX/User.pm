@@ -49,10 +49,10 @@ KiokuX::User - A generic role for user objects stored in L<KiokuDB>
 This role provides a fairly trivial set of attributes and methods designed to
 ease the storage of objects representing users in a KiokuDB database.
 
-It consumes L<KiokuX::User::ID> which provides the C<id> attribute and
-L<KiokuDB::Role::ID> integration, and L<KiokuX::User::Password> which provides
-an L<Authen::Passphrase> based C<password> attribute and a C<check_password>
-method.
+It consumes L<KiokuX::User::ID> which provides the C<id> attribute and related
+methods as well as L<KiokuDB::Role::ID> integration, and
+L<KiokuX::User::Password> which provides an L<Authen::Passphrase> based
+C<password> attribute and a C<check_password> method.
 
 =head1 USE AS A DELEGATE
 

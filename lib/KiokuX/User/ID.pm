@@ -52,6 +52,22 @@ Using this role implies that user IDs are immutable.
 Implements the required method from L<KiokuX::User::ID> by prefixing the C<id>
 attribute with C<user:>.
 
+=item id_for_user $username
+
+Mangles the username into an ID by prefixing the string C<user:>.
+
+Can be overriden to provide custom namespacing.
+
+Can also be used as a class method from the model:
+
+	sub get_identity_by_username {
+		my ( $self, $username ) = @_;
+
+		my $object_id = MyFoo::Schema::Identity::Username->id_for_user($username);
+
+		return $self->lookup($object_id);
+	}
+
 =back
 
 =head1 ATTRIBUTES
@@ -60,7 +76,8 @@ attribute with C<user:>.
 
 =item id
 
-This is the user's ID in the system. It is not the object ID, but the object ID is derived from it.
+This is the user's ID in the system. It is not the object ID, but the object ID
+is derived from it.
 
 =back
 
