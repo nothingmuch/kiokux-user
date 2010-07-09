@@ -10,15 +10,15 @@ use ok 'KiokuX::User';
 use ok 'KiokuX::User::Util' => qw(crypt_password);
 
 {
-	package Foo::User;
-	use Moose;
+    package Foo::User;
+    use Moose;
 
-	with qw(KiokuX::User);
+    with qw(KiokuX::User);
 }
 
 my $o = Foo::User->new(
-	id       => "bar",
-	password => crypt_password("foo"),
+    id       => "bar",
+    password => crypt_password("foo"),
 );
 
 does_ok( $o, "KiokuX::User" );
@@ -44,4 +44,6 @@ $o->set_password("bar");
 ok !$o->check_password("foo"), "password changed";
 
 ok $o->check_password("bar"), "new password";
+
+# ex: set sw=4 et:
 

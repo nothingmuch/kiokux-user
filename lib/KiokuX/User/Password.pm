@@ -13,7 +13,7 @@ has password => (
     isa      => Passphrase,
     is       => 'rw',
     coerce   => 1,
-	required => 1,
+    required => 1,
     #handles => { check_password => "match" },
 );
 
@@ -23,8 +23,8 @@ sub check_password {
 }
 
 sub set_password {
-	my ( $self, @args ) = @_;
-	$self->password( crypt_password(@args) );
+    my ( $self, @args ) = @_;
+    $self->password( crypt_password(@args) );
 }
 
 __PACKAGE__
@@ -39,7 +39,7 @@ KiokuX::User::Password - A role for users with a password attribute
 
 =head1 SYNOPSIS
 
-	with qw(KiokuX::User::Password);
+    with qw(KiokuX::User::Password);
 
 =head1 DESCRIPTION
 
@@ -69,4 +69,5 @@ This is a required, read-write attribute.
 
 =cut
 
+# ex: set sw=4 et:
 

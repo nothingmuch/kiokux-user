@@ -8,8 +8,8 @@ use namespace::clean -except => 'meta';
 our $VERSION = "0.01";
 
 with qw(
-	KiokuX::User::ID
-	KiokuX::User::Password
+    KiokuX::User::ID
+    KiokuX::User::Password
 );
 
 __PACKAGE__
@@ -24,25 +24,25 @@ KiokuX::User - A generic role for user objects stored in L<KiokuDB>
 
 =head1 SYNOPSIS
 
-	package MyFoo::Schema::User;
-	use Moose;
+    package MyFoo::Schema::User;
+    use Moose;
 
-	use KiokuX::User::Util qw(crypt_password);
+    use KiokuX::User::Util qw(crypt_password);
 
-	with qw(KiokuX::User);
+    with qw(KiokuX::User);
 
-	my $user = MyFoo::Schema::User->new(
-		id       => $user_id,
-		password => crypt_password($password),
-	);
+    my $user = MyFoo::Schema::User->new(
+        id       => $user_id,
+        password => crypt_password($password),
+    );
 
-	$user->kiokudb_object_id; # "user:$user_id"
+    $user->kiokudb_object_id; # "user:$user_id"
 
-	if ( $user->check_password($read_password) ) {
-		warn "Login successful";
-	} else {
-		warn "Login failed";
-	}
+    if ( $user->check_password($read_password) ) {
+        warn "Login successful";
+    } else {
+        warn "Login failed";
+    }
 
 =head1 DESCRIPTION
 
@@ -63,24 +63,24 @@ If you want to support renaming, multiple authentication methods (e.g. a
 password and/or an openid), it's best to create identity delegates that consume
 this role, and have them point at the actual user object:
 
-	package MyFoo::Schema::Identity;
-	use Moose::Role;
+    package MyFoo::Schema::Identity;
+    use Moose::Role;
 
-	has user => (
-		isa => "MyFoo::Schema::User",
-		is  => "ro",
-		required => 1,
-	);
+    has user => (
+        isa => "MyFoo::Schema::User",
+        is  => "ro",
+        required => 1,
+    );
 
 And here's an example username identity:
 
-	package MyFoo::Schema::Identity::Username;
-	use Moose;
+    package MyFoo::Schema::Identity::Username;
+    use Moose;
 
-	with qw(
-		MyFoo::Schema::Identity
-		KiokuX::User
-	);
+    with qw(
+        MyFoo::Schema::Identity
+        KiokuX::User
+    );
 
 and then point back to these identities from the user:
 
@@ -114,3 +114,6 @@ Yuval Kogman E<lt>nothingmuch@woobling.orgE<gt>
     it and/or modify it under the same terms as Perl itself.
 
 =cut
+
+# ex: set sw=4 et:
+

@@ -6,35 +6,35 @@ use strict;
 use warnings;
 
 use Sub::Exporter -setup => {
-	exports => [qw(
-		crypt_password
-	)],
+    exports => [qw(
+        crypt_password
+    )],
 };
 
 
 use Class::MOP;
 
 sub crypt_password {
-	my @args = @_;
+    my @args = @_;
 
-	unshift @args, "passphrase" if @args % 2 == 1;
+    unshift @args, "passphrase" if @args % 2 == 1;
 
-	my %args = @args;
+    my %args = @args;
 
-	unless ( exists $args{class} ) {
-		%args = (
-			class       => "Authen::Passphrase::SaltedDigest",
-			salt_random => 20,
-			algorithm   => "SHA-1",
-			%args,
-		);
-	}
+    unless ( exists $args{class} ) {
+        %args = (
+            class       => "Authen::Passphrase::SaltedDigest",
+            salt_random => 20,
+            algorithm   => "SHA-1",
+            %args,
+        );
+    }
 
-	my $class = delete $args{class};
+    my $class = delete $args{class};
 
-	Class::MOP::load_class($class);
+    Class::MOP::load_class($class);
 
-	$class->new(%args);
+    $class->new(%args);
 }
 
 __PACKAGE__
@@ -49,12 +49,12 @@ KiokuX::User::Util - Utility functions for L<KiokuX::User>
 
 =head1 SYNOPSIS
 
-	use KiokuX::User::Util;
+    use KiokuX::User::Util;
 
-	MyFoo::User->new(
-		id       => "cutegirl17",
-		password => crypt_password("justin timberlake!!!"),
-	);
+    MyFoo::User->new(
+        id       => "cutegirl17",
+        password => crypt_password("justin timberlake!!!"),
+    );
 
 =head1 DESCRIPTION
 
@@ -75,4 +75,5 @@ random salt.
 
 =cut
 
+# ex: set sw=4 et:
 

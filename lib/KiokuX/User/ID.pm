@@ -8,13 +8,13 @@ use namespace::clean -except => 'meta';
 with qw(KiokuDB::Role::ID);
 
 sub id_for_user {
-	my ( $self, $id ) = @_;
-	return "user:$id"
+    my ( $self, $id ) = @_;
+    return "user:$id"
 }
 
 sub kiokudb_object_id {
-	my $self = shift;
-	$self->id_for_user($self->id);
+    my $self = shift;
+    $self->id_for_user($self->id);
 }
 
 has id => (
@@ -35,7 +35,7 @@ KiokuX::User::ID - L<KiokuDB::Role::ID> integration for user objects
 
 =head1 SYNOPSIS
 
-	with qw(KiokuX::User::ID);
+    with qw(KiokuX::User::ID);
 
 =head1 DESCRIPTION
 
@@ -61,13 +61,13 @@ Can be overriden to provide custom namespacing.
 
 Can also be used as a class method from the model:
 
-	sub get_identity_by_username {
-		my ( $self, $username ) = @_;
+    sub get_identity_by_username {
+        my ( $self, $username ) = @_;
 
-		my $object_id = MyFoo::Schema::Identity::Username->id_for_user($username);
+        my $object_id = MyFoo::Schema::Identity::Username->id_for_user($username);
 
-		return $self->lookup($object_id);
-	}
+        return $self->lookup($object_id);
+    }
 
 =back
 
@@ -84,4 +84,5 @@ is derived from it.
 
 =cut
 
+# ex: set sw=4 et:
 
