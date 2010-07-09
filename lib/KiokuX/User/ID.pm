@@ -20,6 +20,7 @@ sub kiokudb_object_id {
 has id => (
     isa => "Str",
     is  => "ro",
+    required => 1,
 );
 
 __PACKAGE__
